@@ -1,8 +1,16 @@
-pyenv install 3.8.10
+export PATH="$HOME/.pyenv/bin:$PATH"
 
-pyenv global 3.8.10
+eval "$(pyenv init --path)"
 
-pyenv shell 3.8.10
+eval "$(pyenv init -)"
+
+eval "$(pyenv virtualenv-init -)"
+
+source ~/.bashrc  # or ~/.bash_profile
+
+pyenv commands | grep virtualenv
+
+
 
 pyenv virtualenv 3.8.10 jupyter_env
 
