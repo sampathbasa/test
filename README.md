@@ -68,5 +68,6 @@ sys. exit (1)
 ```
 
 
-curl -O http://amazonlinux.default.amazonaws.com/2/core/latest/x86_64/mirror/list/latest-yum.rpm
-sudo rpm -ivh --replacepkgs latest-yum.rpm
+curl -O http://amazonlinux.default.amazonaws.com/2/core/latest/x86_64/packages/yum-3.4.3-167.amzn2.0.3.noarch.rpm
+sudo rpm -ivh --replacepkgs yum-3.4.3-167.amzn2.0.3.noarch.rpm
+yum --version
