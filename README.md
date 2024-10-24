@@ -44,3 +44,25 @@ except KeyboardInterrupt as e:
     print("\nExiting on user cancel.", file=sys.stderr)
     sys.exit(1)
 
+```
+#1/us/bin/python import sys try:
+import yum
+except ImportError:
+print ›› sys.stderr,
+"**
+There was a problem importing one of the Python modules required to run yun. The error leading to this problem was:
+Xs
+Please install a package which provides this module, or verify that the module is installed correctly.
+It's possible that the above module doesn't match the current version of Python, which is:
+If you cannot solve this problem yourself, please go to the yum fag at :
+http://y.baseur1.org/wiki/Faq
+***% (sys. exc_value, sys. version)
+sys. exit (1)
+sys. path. insert(0, '/usr/share/yum-cli*) try:
+import yummain
+yummain. user _main(sys. argv[1:], exit_code=True)
+except KeyboardInterrupt, e:
+print » sys. stderr,
+\\nExiting on user cancel."
+sys. exit (1)
+```
