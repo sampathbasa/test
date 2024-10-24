@@ -1,9 +1,14 @@
-pip3 install virtualenv
+pyenv install 3.8.10
 
-virtualenv -p /usr/bin/python3.7 jupyter_env
+pyenv global 3.8.10
 
-source jupyter_env/bin/activate
+pyenv shell 3.8.10
+
+pyenv virtualenv 3.8.10 jupyter_env
+
+pyenv activate jupyter_env
 
 pip install jupyterlab
 
 jupyter lab
+
