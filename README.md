@@ -1,7 +1,16 @@
-head -n 1 /usr/bin/yum
+pip uninstall jupyter jupyterlab jupyterlab_launcher ipywidgets -y
 
-which python2
+sudo yum install python3
 
-sudo ln -s /usr/bin/python2 /usr/bin/python
+sudo yum install python3-pip
 
-sudo yum update -y
+sudo pip3 install virtualenv
+
+source ~/jupyter_env/bin/activate
+
+pip install jupyterlab
+
+jupyter lab
+
+
+jupyter --version
