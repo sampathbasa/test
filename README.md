@@ -1,5 +1,7 @@
-find / -name python3.8 2>/dev/null
+head -n 1 /usr/bin/yum
 
-sudo alternatives --config python3
+which python2
 
-hash -r
+sudo ln -s /usr/bin/python2 /usr/bin/python
+
+sudo yum update -y
