@@ -1,1 +1,1 @@
-ssh -L 8888:localhost:8888 root@your_server_ip 
+jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
