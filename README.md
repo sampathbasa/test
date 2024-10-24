@@ -16,3 +16,31 @@ python3.8 -c "import ssl; print(ssl.OPENSSL_VERSION)"
 
 jupyter lab --generate-config
 
+
+#!/usr/bin/python
+import sys
+try:
+    import yum
+except ImportError as e:
+    print(
+        """
+        ** There was a problem importing one of the Python modules required to run yum.
+        The error leading to this problem was: {}
+        Please install a package which provides this module, or verify that the module is installed correctly.
+        It's possible that the above module doesn't match the current version of Python, which is: {}
+
+        If you cannot solve this problem yourself, please go to the yum FAQ at: 
+        http://y.baseurl.org/wiki/Faq
+        """.format(e, sys.version),
+        file=sys.stderr
+    )
+    sys.exit(1)
+
+sys.path.insert(0, '/usr/share/yum-cli')
+try:
+    import yummain
+    yummain.user_main(sys.argv[1:], exit_code=True)
+except KeyboardInterrupt as e:
+    print("\nExiting on user cancel.", file=sys.stderr)
+    sys.exit(1)
+
