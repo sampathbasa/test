@@ -66,3 +66,7 @@ print » sys. stderr,
 \\nExiting on user cancel."
 sys. exit (1)
 ```
+
+
+curl -O http://amazonlinux.default.amazonaws.com/2/core/latest/x86_64/mirror/list/latest-yum.rpm
+sudo rpm -ivh --replacepkgs latest-yum.rpm
