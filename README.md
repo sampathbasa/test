@@ -1,15 +1,9 @@
-sudo ln -sf /usr/bin/python3.7 /usr/bin/python3
+pip3 install virtualenv
 
-ls -l /usr/bin/python3
+virtualenv -p /usr/bin/python3.7 jupyter_env
 
-python3 --version
+source jupyter_env/bin/activate
 
-pip3 --version
+pip install jupyterlab
 
-pip3 --version
-
-/usr/bin/python3.7 -m ensurepip
-
-pip3 install --upgrade pip
-
-pip3 install jupyterlab
+jupyter lab
