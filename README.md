@@ -12,3 +12,14 @@
           aws ecs wait services-stable --cluster $CLUSTER_NAME --services $SERVICE_NAME
           echo "Deployment to ECS is complete"
 ```
+
+```
+aws ecs register-task-definition \
+    --family your-task-family \
+    --container-definitions '[{"name":"your-container-name","image":"your-image:your-new-tag","memory":512,"cpu":256,"essential":true}]'
+
+aws ecs update-service \
+    --cluster your-cluster-name \
+    --service your-service-name \
+    --task-definition your-task-family:revision
+```
