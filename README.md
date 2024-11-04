@@ -29,3 +29,34 @@ aws sts assume-role \
     --role-arn arn:aws:iam::account-id:role/role-name \
     --role-session-name session-name
 
+```
+#!/bin/bash
+
+# Variables
+ROLE_ARN="arn:aws:iam::123456789012:role/MyRole"  # Replace with your IAM role ARN
+SESSION_NAME="MySession"  # Replace with your session name
+
+# Assume the role and capture the output
+CREDENTIALS_JSON=$(aws sts assume-role --role-arn "$ROLE_ARN" --role-session-name "$SESSION_NAME")
+
+# Check if the assume-role command succeeded
+if [ $? -ne 0 ]; then
+    echo "Failed to assume role."
+    exit 1
+fi
+
+# Extract the temporary security credentials
+AWS_ACCESS_KEY_ID=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.AccessKeyId')
+AWS_SECRET_ACCESS_KEY=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SecretAccessKey')
+AWS_SESSION_TOKEN=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SessionToken')
+
+# Export the credentials as environment variables
+export AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY
+export AWS_SESSION_TOKEN
+
+# Optional: Print out the caller identity to verify
+aws sts get-caller-identity
+
+echo "Assumed role and exported temporary credentials."
+```
