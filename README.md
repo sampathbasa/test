@@ -61,3 +61,36 @@ rm current-task-def.json updated-task-def.json
 
 echo "Deployment updated with new image: $NEW_IMAGE_URI"
 ```
+
+
+
+```
+#!/bin/bash
+
+# Variables
+ROLE_ARN="arn:aws:iam::585768144852:role/CUSPFE-RAPID-EMCI-GITHUBACTION-ROLE-DEV"
+
+# Assume the role and capture the output
+CREDENTIALS_JSON=$(aws sts assume-role --role-arn "$ROLE_ARN" --role-session-name "MySession")
+
+# Check if the assume-role command succeeded
+if [ $? -ne 0 ]; then
+  echo "Failed to assume role."
+  exit 1
+fi
+
+# Extract the temporary security credentials
+AWS_ACCESS_KEY_ID=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.AccessKeyId')
+AWS_SECRET_ACCESS_KEY=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SecretAccessKey')
+AWS_SESSION_TOKEN=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SessionToken')
+
+# Export the credentials as environment variables
+export AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY
+export AWS_SESSION_TOKEN
+
+# Optional: Print out the caller identity to verify
+aws sts get-caller-identity
+echo "Assumed role and exported temporary credentials."
+
+```
