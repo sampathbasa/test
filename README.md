@@ -1,13 +1,14 @@
+ ```
+     - name: Update ECS service with new image
+        env:
+          CLUSTER_NAME: demo-cluster1  # Replace with your ECS cluster name
+          SERVICE_NAME: frontend       # Replace with your ECS service name
+          IMAGE_URI: <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/<your-repository-name>:${{ github.sha }}
+        run: |
+          aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --desired-count 1 --region us-east-1 --cli-input-json "{\"service\": {\"containerDefinitions\": [{\"image\": \"$IMAGE_URI\"}]}}"
+
+      - name: Confirm ECS deployment
+        run: |
+          aws ecs wait services-stable --cluster $CLUSTER_NAME --services $SERVICE_NAME
+          echo "Deployment to ECS is complete"
 ```
-- name: Replace image URI in task definition
-      run: |
-        sed -i 's|{{IMAGE_URI}}|'"$IMAGE_URI"'|g' ecs-task-def.json
-```
-https://docs.github.com/en/actions/use-cases-and-examples/deploying/deploying-to-amazon-elastic-container-service
-
-GitHub-hosted runners need open access to AWS ECS and ECR endpoints over HTTPS.
-
-
-Hi GitHub Support Team,
-
-I am encountering an issue with deploying an application to my AWS ECS service through GitHub Actions. The deployment process fails due to an "ECS connection timeout" error. From what I understand, GitHub Actions runners require open HTTPS access to AWS ECS and ECR endpoints for deployments to succeed.
