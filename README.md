@@ -23,3 +23,9 @@ aws ecs update-service \
     --service your-service-name \
     --task-definition your-task-family:revision
 ```
+
+```
+aws sts assume-role \
+    --role-arn arn:aws:iam::account-id:role/role-name \
+    --role-session-name session-name
+
