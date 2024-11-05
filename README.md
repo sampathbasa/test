@@ -1,96 +1,14 @@
 ```
- - name: Register new task definition
-      id: register-task
+ - name: SSH into EC2 and Deploy
+      env:
+        IMAGE_URI: ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
       run: |
-        # Register task definition from file and capture the new ARN
-        TASK_DEF_ARN=$(aws ecs register-task-definition \
-          --cli-input-json file://ecs-task-definition.json \
-          --query 'taskDefinition.taskDefinitionArn' \
-          --output text)
-        echo "task_definition_arn=$TASK_DEF_ARN" >> $GITHUB_ENV
+        # Assuming you have SSH access and your EC2 instance is configured to allow SSH
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} << 'EOF'
+          # Pull the latest Docker image
+          sudo docker pull $IMAGE_URI
 
-    - name: Update ECS service
-      run: |
-        aws ecs update-service \
-          --cluster your-cluster-name \
-          --service your-service-name \
-          --task-definition ${{ env.task_definition_arn }}
-```
-
-```
-# Variables
-CLUSTER_NAME="<your-cluster-name>"
-SERVICE_NAME="<your-service-name>"
-NEW_IMAGE_URI="<account-id>.dkr.ecr.<region>.amazonaws.com/<repository-name>:<tag>"
-
-# Step 1: Get the latest task definition ARN for the ECS service
-CURRENT_TASK_DEF_ARN=$(aws ecs describe-services \
-  --cluster "$CLUSTER_NAME" \
-  --services "$SERVICE_NAME" \
-  --query "services[0].taskDefinition" \
-  --output text)
-
-# Step 2: Fetch the current task definition JSON
-aws ecs describe-task-definition \
-  --task-definition "$CURRENT_TASK_DEF_ARN" \
-  --query "taskDefinition" \
-  --output json > current-task-def.json
-
-# Step 3: Replace the image in the task definition JSON file
-# Using `jq` to modify the JSON with the new image URI.
-UPDATED_TASK_DEF_JSON=$(jq --arg IMAGE "$NEW_IMAGE_URI" \
-  '.containerDefinitions[0].image = $IMAGE' current-task-def.json)
-
-# Save the updated JSON to a new file
-echo "$UPDATED_TASK_DEF_JSON" > updated-task-def.json
-
-# Step 4: Register the new task definition
-NEW_TASK_DEF_ARN=$(aws ecs register-task-definition \
-  --cli-input-json file://updated-task-def.json \
-  --query "taskDefinition.taskDefinitionArn" \
-  --output text)
-
-# Step 5: Update the ECS service to use the new task definition
-aws ecs update-service \
-  --cluster "$CLUSTER_NAME" \
-  --service "$SERVICE_NAME" \
-  --task-definition "$NEW_TASK_DEF_ARN"
-
-# Cleanup: Optional, remove temporary files
-rm current-task-def.json updated-task-def.json
-
-echo "Deployment updated with new image: $NEW_IMAGE_URI"
-```
-
-
-
-```
-#!/bin/bash
-
-# Variables
-ROLE_ARN="arn:aws:iam::585768144852:role/CUSPFE-RAPID-EMCI-GITHUBACTION-ROLE-DEV"
-
-# Assume the role and capture the output
-CREDENTIALS_JSON=$(aws sts assume-role --role-arn "$ROLE_ARN" --role-session-name "MySession")
-
-# Check if the assume-role command succeeded
-if [ $? -ne 0 ]; then
-  echo "Failed to assume role."
-  exit 1
-fi
-
-# Extract the temporary security credentials
-AWS_ACCESS_KEY_ID=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.AccessKeyId')
-AWS_SECRET_ACCESS_KEY=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SecretAccessKey')
-AWS_SESSION_TOKEN=$(echo "$CREDENTIALS_JSON" | jq -r '.Credentials.SessionToken')
-
-# Export the credentials as environment variables
-export AWS_ACCESS_KEY_ID
-export AWS_SECRET_ACCESS_KEY
-export AWS_SESSION_TOKEN
-
-# Optional: Print out the caller identity to verify
-aws sts get-caller-identity
-echo "Assumed role and exported temporary credentials."
-
+          # Stop and remove the existing container
+          sudo docker stop my-app || true
+          sudo docker rm my-app || true
 ```
