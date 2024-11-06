@@ -21,7 +21,7 @@
 
       - name: SSH into EC2 and run commands
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} << 'EOF'
+          ssh -tt -o StrictHostKeyChecking=no -i private_key.pem ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} << 'EOF'
             # Add your deployment commands here
             echo "Running deployment on EC2..."
             # Example:
