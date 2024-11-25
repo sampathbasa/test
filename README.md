@@ -1,12 +1,11 @@
 ```
-Frontend (FE):
+Hi Team,
 
-Dockerize FE application for build & deployment: Done
-CI/CD pipeline code setup for automated deployment: Done
-Configure DNS names and certificates: Done
-CI/CD pipeline test run: Done
-Backend (BE):
+I hope this message finds you well. I wanted to inform you that I will be on leave from Saturday, December 2nd, to Wednesday, December 6th. During this time, I will be away from my laptop and may not be able to respond promptly to emails or messages.
 
-Dockerize BE application for build & deployment: Not started
-CI/CD pipeline code setup for automated deployment: Ready, awaiting application code from the developer.
-CI/CD pipeline test run: Not started
+Please feel free to reach out to [Backup Contact/Team Member's Name] if anything urgent arises. I will ensure to address any pending tasks before my leave and catch up on anything upon my return.
+
+Thank you for your understanding.
+
+Best regards,
+Sampath
