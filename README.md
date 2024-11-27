@@ -1,4 +1,8 @@
 ```
+Hi Team,
+
+The latest functional code is now in the main branch of the repository. Please ensure that any future changes are made using the main branch as the base.
+
 Using the main Branch as the Base for Your Work
 
 Sync Your Local Repository with the Latest main Branch
@@ -37,3 +41,13 @@ git push origin your-feature-branch
 Submit a Pull Request
 
 Once your work is ready, submit a pull request to merge your branch back into main.
+
+
+Deployment Details:
+
+The frontend is deployed on port 3000.
+The backend is deployed on port 8000.
+You can also use the DNS URL to access the application.
+Going forward, there won’t be any further changes to the port numbers.
+
+Let me know if you have any questions.
