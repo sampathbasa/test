@@ -1,4 +1,20 @@
 ```
+sudo yum update -y
+sudo amazon-linux-extras install nginx1.12
+sudo systemctl start nginx sudo systemctl enable nginx
+sudo systemctl status nginx
+sudo nano /etc/nginx/conf.d/mywebsite.conf
+sudo nginx -t
+sudo systemctl reload nginx
+
+
+sudo ls -l /proc/1/exe
+sudo ls -l /proc/1/exe
+sudo ls -lah /lib/systemd/system/nginx.service
+sudo ls /lib/systemd/system/nginx.service
+
+
+
 sudo rm -rf /usr/lib/systemd/system/nginx.service
 sudo dnf remove nginx
 sudo yum remove nginx
