@@ -1,4 +1,10 @@
 ```
+sudo rm -rf /usr/lib/systemd/system/nginx.service
+sudo dnf remove nginx
+sudo yum remove nginx
+sudo userdel -r nginx
+
+
 sudo rm -rf /etc/nginx
 sudo rm -rf /etc/init.d/nginx
 sudo rm -rf /var/log/nginx
