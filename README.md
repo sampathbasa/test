@@ -1,4 +1,9 @@
 ```
+useradd -r -s /sbin/nologin nginx
+cat /etc/nginx/nginx.conf
+user nginx;
+
+
 sudo yum update -y
 sudo amazon-linux-extras install nginx1.12
 sudo systemctl start nginx sudo systemctl enable nginx
