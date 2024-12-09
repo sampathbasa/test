@@ -16,3 +16,5 @@ sudo journalctl -xe
 sudo systemctl status nginx
 
 sudo find / -type l -name "nginx"
+
+rpm -ql nginx | grep conf
