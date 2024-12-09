@@ -1,5 +1,12 @@
 ```
 sudo rm -rf /etc/nginx
+sudo rm -rf /etc/init.d/nginx
+sudo rm -rf /var/log/nginx
+sudo rm -rf /var/cache/nginx/
+sudo rm -rf /usr/sbin/nginx
+
+
+sudo rm -rf /etc/nginx
 sudo rm -rf /var/log/nginx
 sudo rm -rf /usr/sbin/nginx
 sudo rm -rf /run/nginx.pid
