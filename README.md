@@ -18,3 +18,12 @@ sudo systemctl status nginx
 sudo find / -type l -name "nginx"
 
 rpm -ql nginx | grep conf
+
+
+
+sudo cp /usr/share/nginx/nginx.conf.default /etc/nginx/nginx.conf
+
+sudo yum remove nginx -y
+sudo yum install nginx -y
+
+ls /etc/nginx/nginx.conf
