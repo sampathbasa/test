@@ -14,3 +14,5 @@ sudo systemctl enable nginx
 
 sudo journalctl -xe
 sudo systemctl status nginx
+
+sudo find / -type l -name "nginx"
