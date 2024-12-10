@@ -1,4 +1,12 @@
 ```
+# Generate a new private key
+openssl genrsa -out your_domain.key 2048
+
+# Generate a new CSR using this key
+openssl req -new -key your_domain.key -out your_domain.csr
+--------------------------------------------------
+
+
 openssl rsa -noout -modulus -in /path/to/your/private.key | openssl md5
 openssl x509 -noout -modulus -in /path/to/your/certificate.crt | openssl md5
 ------------------------------
