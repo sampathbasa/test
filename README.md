@@ -1,4 +1,9 @@
 ```
+openssl rsa -noout -modulus -in /path/to/your/private.key | openssl md5
+openssl x509 -noout -modulus -in /path/to/your/certificate.crt | openssl md5
+------------------------------
+
+
 server {
     listen 443 ssl;
     server_name your_domain.com;
