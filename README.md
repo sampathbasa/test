@@ -1,4 +1,28 @@
 ```
+version: "3.3"
+services:
+    nginx-dev:
+          image: nginx:latest
+          container_name: nginx-dev
+          volumes: 
+            - ./default.dev.conf:/etc/nginx/conf.d/default.dev.conf
+            - ./ssl:/etc/nginx/ssl
+          restart: always
+          ports:
+            - "80:80"
+            - "443:443"
+          networks:
+            - nissan
+    
+volumes:
+  ci-dev:  
+
+networks:
+  ci-dev:
+    external: true
+
+
+
 server {
     listen 80;
     server_name domainname;
