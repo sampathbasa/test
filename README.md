@@ -1,6 +1,69 @@
 ```
 server {
     listen 80;
+    server_name domainname;
+    return 301 https://domain name$request_uri;
+}
+
+# HTTPS server block for secure connections
+server {
+    listen 443 ssl;
+    ssl_certificate     /etc/nginx/ssl/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/privkey.pem;
+    server_name dcap-test.s3s.com;
+    server_tokens off;
+
+    # Security Headers
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Xss-Protection "1; mode=block" always;
+
+    # Limit client upload size
+    client_max_body_size 20000M;
+
+    # Timeout settings for proxy
+    proxy_connect_timeout 600s;
+    proxy_send_timeout 600s;
+    proxy_read_timeout 600s;
+    send_timeout 600s;
+
+    # Proxy for Invoice Extraction API
+    location ~ /api/v1/ {
+        proxy_pass http://service:8001;
+        proxy_redirect off;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $server_name;
+    }
+
+    # Proxy for other API routes
+    location ~ /api/v1/ {
+        proxy_pass http://rt-dcap:8000;
+        proxy_redirect off;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $server_name;
+    }
+
+    # Proxy for the frontend
+    location / {
+        proxy_pass http://service:80;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+
+
+
+server {
+    listen 80;
     location / {
       root   /usr/share/nginx/html;
       index  index.html index.htm;
