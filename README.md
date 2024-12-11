@@ -34,7 +34,7 @@ server {
     listen 443 ssl;
     ssl_certificate     /etc/nginx/ssl/fullchain.pem;
     ssl_certificate_key /etc/nginx/ssl/privkey.pem;
-    server_name dcap-test.s3s.com;
+    server_name .com;
     server_tokens off;
 
     # Security Headers
@@ -64,7 +64,7 @@ server {
 
     # Proxy for other API routes
     location ~ /api/v1/ {
-        proxy_pass http://rt-dcap:8000;
+        proxy_pass http://:8000;
         proxy_redirect off;
         proxy_set_header HOST $http_host;
         proxy_set_header X-Real-IP $remote_addr;
