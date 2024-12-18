@@ -1,10 +1,15 @@
 ```
-Hi Lakshman,
+# Install Rust toolchain and build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    build-essential \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && export PATH="$HOME/.cargo/bin:$PATH" \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-Last Friday, you gave a heads-up regarding finishing the backend code before the sprint end date, which is December 23rd. You also provided an ETA that your team would create the infrastructure by Monday.
-
-We have completed our part and are ready with the code ahead of schedule. However, I noticed that the infrastructure has not been created as per the agreed timeline. From my understanding, this doesn't seem to be a blocker for your team to proceed with the infrastructure setup.
-
+# Add Rust binaries to PATH
+ENV PATH="/root/.cargo/bin:$PATH"
 
 
 
