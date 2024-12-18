@@ -1,4 +1,24 @@
 ```
+Hi Lakshman,
+
+Last Friday, you gave a heads-up regarding finishing the backend code before the sprint end date, which is December 23rd. You also provided an ETA that your team would create the infrastructure by Monday.
+
+We have completed our part and are ready with the code ahead of schedule. However, I noticed that the infrastructure has not been created as per the agreed timeline. From my understanding, this doesn't seem to be a blocker for your team to proceed with the infrastructure setup.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------
 version: "3.3"
 services:
     nginx-dev:
