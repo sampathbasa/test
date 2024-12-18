@@ -1,4 +1,10 @@
 ```
+RUN apt-get update && apt-get install -y curl \
+    && curl -I https://sh.rustup.rs || { echo "Rust installation URL is not accessible"; exit 1; }
+
+
+
+
 FROM python:3.10
 
 # Install Rust toolchain and build tools
