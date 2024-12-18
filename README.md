@@ -1,4 +1,21 @@
 ```
+FROM python:3.10
+
+# Install Rust toolchain and build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    build-essential \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Rust binaries to PATH
+ENV PATH="/root/.cargo/bin:$PATH"
+
+# Install Python dependencies
+RUN /bin/bash -c "source $HOME/.cargo/env && pip install --upgrade pip && pip install -r ./python_api/packages/requirements.txt"
+
+
 # Install Rust toolchain and build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
