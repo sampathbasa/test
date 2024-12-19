@@ -1,4 +1,10 @@
 ```
+We have submitted a merge request in our organization's repository, which has triggered various security scanners, including the credential scanner. However, the credential scanning process appears to be taking an unusually long time to complete, and we have not received any updates on its progress.
+
+This delay is impacting our deployment timeline, as the application cannot be deployed until this process is complete. Could you please provide an estimated time frame for when the credential scanning will be completed? Additionally, if there are any steps we can take to expedite the process, kindly let us know.
+
+Your assistance in resolving this matter promptly would be greatly appreciated.
+
 RUN apt-get update && apt-get install -y curl \
     && curl -I https://sh.rustup.rs || { echo "Rust installation URL is not accessible"; exit 1; }
 
