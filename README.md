@@ -1,44 +1,8 @@
 ```
-We have submitted a merge request in our organization's repository, which has triggered various security scanners, including the credential scanner. However, the credential scanning process appears to be taking an unusually long time to complete, and we have not received any updates on its progress.
+# Debug: List the folder structure to verify dependencies are in the right place
+RUN echo "Checking /app/python_api structure:" && ls -l /app/python_api
+RUN echo "Checking /app/python_api/dependencies structure:" && ls -l /app/python_api/dependencies || echo "dependencies folder not found"
 
-This delay is impacting our deployment timeline, as the application cannot be deployed until this process is complete. Could you please provide an estimated time frame for when the credential scanning will be completed? Additionally, if there are any steps we can take to expedite the process, kindly let us know.
-
-Your assistance in resolving this matter promptly would be greatly appreciated.
-
-RUN apt-get update && apt-get install -y curl \
-    && curl -I https://sh.rustup.rs || { echo "Rust installation URL is not accessible"; exit 1; }
-
-
-
-
-FROM python:3.10
-
-# Install Rust toolchain and build tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    build-essential \
-    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add Rust binaries to PATH
-ENV PATH="/root/.cargo/bin:$PATH"
-
-# Install Python dependencies
-RUN /bin/bash -c "source $HOME/.cargo/env && pip install --upgrade pip && pip install -r ./python_api/packages/requirements.txt"
-
-
-# Install Rust toolchain and build tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    build-essential \
-    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && export PATH="$HOME/.cargo/bin:$PATH" \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Add Rust binaries to PATH
-ENV PATH="/root/.cargo/bin:$PATH"
 
 
 
