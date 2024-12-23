@@ -1,4 +1,13 @@
 ```
+Vamsi had a query on Friday about our application running on EKS. He thought our application was running entirely on EC2 instance. However, I recall that during initial discussions, we decided to deploy on EKS.
+
+As I remember, after discussing with Lakshman, it was suggested that deploying on EKS would be quicker since they already had a template ready. We agreed to proceed with EKS deployment right from the beginning.
+
+Could you please explain this to Vamsi and share your thoughts on his query?
+
+
+
+
 # Debug: List the folder structure to verify dependencies are in the right place
 RUN echo "Checking /app/python_api structure:" && ls -l /app/python_api
 RUN echo "Checking /app/python_api/dependencies structure:" && ls -l /app/python_api/dependencies || echo "dependencies folder not found"
