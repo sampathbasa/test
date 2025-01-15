@@ -1,14 +1,8 @@
-```
-Regarding your question about whether we are running the database as a pod in the EKS cluster:
+From Ganesh's issue, I understand that our SQLite database (chatbox.db) stores the data within the container, but the data gets erased each time the container is recreated during the CI/CD pipeline run.
 
-The Dockerfile is only installing SQLite and the necessary packages from the requirements.txt file, and then it runs the main service. There is no separate database pod. Instead, the main service is running the SQLite database directly as an embedded database.
+To address this, we would like to ensure that the database data persists across container restarts. My proposed approach is to request a persistent volume for the SQLite database (chatbox.db file) within the EKS cluster.
 
-
-
-
-# Debug: List the folder structure to verify dependencies are in the right place
-RUN echo "Checking /app/python_api structure:" && ls -l /app/python_api
-RUN echo "Checking /app/python_api/dependencies structure:" && ls -l /app/python_api/dependencies || echo "dependencies folder not found"
+By utilizing a persistent volume, we can store the SQLite database outside the container, ensuring that the data remains intact even when the container is recreated during CI/CD pipeline executions.
 
 
 
