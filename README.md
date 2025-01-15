@@ -1,9 +1,7 @@
 ```
-Vamsi had a query on Friday about our application running on EKS. He thought our application was running entirely on EC2 instance. However, I recall that during initial discussions, we decided to deploy on EKS.
+Regarding your question about whether we are running the database as a pod in the EKS cluster:
 
-As I remember, after discussing with Lakshman, it was suggested that deploying on EKS would be quicker since they already had a template ready. We agreed to proceed with EKS deployment right from the beginning.
-
-Could you please explain this to Vamsi and share your thoughts on his query?
+The Dockerfile is only installing SQLite and the necessary packages from the requirements.txt file, and then it runs the main service. There is no separate database pod. Instead, the main service is running the SQLite database directly as an embedded database.
 
 
 
