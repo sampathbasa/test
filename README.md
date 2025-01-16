@@ -1,8 +1,8 @@
-From Ganesh's issue, I understand that our SQLite database (chatbox.db) stores the data within the container, but the data gets erased each time the container is recreated during the CI/CD pipeline run.
+Thank you for the suggestion to use DynamoDB for our database needs. I wanted to clarify that we are currently using SQLite3 for this project because it's a POC and is lightweight and easy to set up.
 
-To address this, we would like to ensure that the database data persists across container restarts. My proposed approach is to request a persistent volume for the SQLite database (chatbox.db file) within the EKS cluster.
+Our primary request is to ensure that the data persists across container restarts. For this purpose, persisting the SQLite3 database (chatbox.db file) using a persistent volume would be sufficient.
 
-By utilizing a persistent volume, we can store the SQLite database outside the container, ensuring that the data remains intact even when the container is recreated during CI/CD pipeline executions.
+Could you please share the reasoning behind the suggestion to switch to DynamoDB?
 
 
 
