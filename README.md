@@ -1,8 +1,9 @@
-Thank you for the suggestion to use DynamoDB for our database needs. I wanted to clarify that we are currently using SQLite3 for this project because it's a POC and is lightweight and easy to set up.
+Our backend developer has reviewed the file and identified the resolution.
 
-Our primary request is to ensure that the data persists across container restarts. For this purpose, persisting the SQLite3 database (chatbox.db file) using a persistent volume would be sufficient.
+We request that you share the chatbox.db file with us at the end of each day for a week. To facilitate this, I will create a separate group specifically for file sharing. Kindly ensure that the file name includes the date when sharing, so we can efficiently manage backups.
 
-Could you please share the reasoning behind the suggestion to switch to DynamoDB?
+Thank you for your cooperation!
+
 
 
 
